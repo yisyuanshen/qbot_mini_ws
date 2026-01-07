@@ -56,7 +56,13 @@ source install/setup.bash
 4\. Run the nodes you need:
 
 ```bash
-ros2 run [your_package] [your_node]
+# ros2 run [your_package] [your_node]
+ros2 run test_cpp talker
+ros2 run test_py listener
+
+# ros2 run [your_package] [your_launch_file]
+ros2 launch test_cpp test.launch.py
+ros2 launch test_py test.launch.py
 ```
 
 ## Additional Useful Commands
