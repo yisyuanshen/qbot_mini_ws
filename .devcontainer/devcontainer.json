@@ -1,0 +1,39 @@
+{
+    "name": "Robot Dev Environment",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "runArgs": [
+        // Uncomment gpu and nvidia args under x86 environment
+        // "--gpus", "all",
+        // "--runtime=nvidia",
+
+        // Comment display args under macOS environment
+        "-e", "DISPLAY=${localEnv:DISPLAY}",
+        "-v", "/tmp/.X11-unix:/tmp/.X11-unix",
+
+        "--net=host",
+        "--privileged"
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-python.python",
+                "ms-iot.vscode-ros",
+                "twxs.cmake"
+            ]
+        }
+    },
+    
+    "features": {
+        "ghcr.io/devcontainers/features/desktop-lite:1": {
+            "version": "latest"
+        }
+    },
+    "forwardPorts": [6080],
+
+    "postCreateCommand": "sudo apt-get update && rosdep update && rosdep install --from-paths src --ignore-src -y",
+
+    "remoteUser": "root"
+}
